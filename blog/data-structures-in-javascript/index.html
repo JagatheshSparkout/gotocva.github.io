@@ -22,14 +22,14 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: #007bff !important;">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: #007bff !important;<br>">
       
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto" style="margin-left: 80%;">
+        <ul class="navbar-nav mr-auto" style="margin-left: 80%;<br>">
           <li class="nav-item active">
             <a class="nav-link top-menu" href="https://gotocva.github.io/">Home <span class="sr-only">(current)</span></a>
           </li>
@@ -50,7 +50,7 @@
                 <div class="row">
 
                     <div class="col-md-10">
-                        <h1 class="display-3"10style="font-weight: 600;">Data structures in Javascript</h1>                    
+                        <h1 class="display-3"10style="font-weight: 600;<br>">Data structures in Javascript</h1>                    
                     </div>
                 </div>
             </div>
@@ -62,142 +62,27 @@
       <div class="container">
         
         <!-- Example row of columns -->
-        <p>“Bad programmers worry about the code. Good programmers worry about data structures and their relationships.”
-— Linus Torvalds, Creator of Linux and Git
+        <p>
+          “Bad programmers worry about the code. Good programmers worry about data structures and their relationships.”
+</p>
+<p>— Linus Torvalds, Creator of Linux and Git</p>
+<p>
 Really, one of the most difficult parts in programming is structuring the data.
 JavaScript is one of the evolving programming languages whose support starts from the most rudimentary structuring concepts like stacks, queues, linked lists, trees, graphs, hash tables.
 Stacks and Queues are simpler because they are constructed from linked lists. Trees and graphs are more complex because they extend the concept of linked lists.
 Among these types, the most commonly used are linked list and Hash tables, which are scrutinized below.
-Linked Lists
+</p>
+<h4>Linked Lists</h4>
 Linked Lists store information components in a successive request. Rather than keeping files, connected records hold pointers to different components. The principal hub is known as the head while the last hub is known as the tail. In a separately connected rundown, every hub has just a single pointer to the following hub. Here, the head is the place we start our stroll down whatever is left of the rundown. In a doubly-connected rundown, a pointer to the past hub is additionally kept. Subsequently, we can begin from the tail and walk ‘in reverse’ around the head.
-The class below explains the basics of linked list
-class Node {
-constructor(value, next, prev) {
-this.value = value;
-this.next = next;
-this.prev = prev;
-}
-}
-class LinkedList {
-constructor() {
-this.head = null;
-this.tail = null;
-}
-addToHead(value) {
-const node = new Node(value, null, this.head);
-if (this.head) this.head.next = node;
-else this.tail = node;
-this.head = node;
-}
-addToTail(value) {
-const node = new Node(value, this.tail, null);
-if (this.tail) this.tail.prev = node;
-else this.head = node;
-this.tail = node;
-}
-removeHead() {
-if (!this.head) return null;
-const value = this.head.value;
-this.head = this.head.prev;
-if (this.head) this.head.next = null;
-else this.tail = null;
-return value;
-}
-removeTail() {
-if (!this.tail) return null;
-const value = this.tail.value;
-this.tail = this.tail.next;
-if (this.tail) this.tail.prev = null;
-else this.head = null;
-return value;
-}
-search(value) {
-let current = this.head;
-while (current) {
-if (current.value === value) return value;
-current = current.prev;
-}
-return null;
-}
-indexOf(value) {
-const indexes = [];
-let current = this.tail;
-let index = 0;
-while (current) {
-if (current.value === value) indexes.push(index);
-current = current.next;
-index++;
-}
-return indexes;
-}
-}
-Have a look into the above class, they explain basics about linked lists practically.
-Hash Table
+The class below explains the basics of linked list<br>
+<br>
+<h4>Hash Table</h4>
 A Hash Table is a word reference like structure that sets keys to values. The area in memory of each match is controlled by a hash work, which acknowledges a key and returns the location where the combine ought to be embedded and recovered. Impacts can result if at least two keys convert to a similar location. For heartiness, getters and setters ought to envision these occasions to guarantee that all information can be recouped and no information is overwritten. Normally, connected records offer the least complex arrangement. Having huge tables likewise makes a difference.
 Motivated by the Internet, blockchain advancements try to open source the precise structure of the web at the convention level. By utilizing hash capacities to make changeless fingerprints for each square of information, basically, the whole database can exist transparently on the web for anybody to see and add to. Fundamentally, blockchains are simply separately connected arrangements of double trees of cryptographic hashes. The hashing is cryptic to the point that a database of monetary exchanges can be made and refreshed out in the open by anybody! The amazing ramifications are simply the magnificent influence to make cash. What was once workable for governments and national banks, presently anybody can safely make his or her own cash! This is the key knowledge acknowledged by the originator of Ethereum and the pseudonymous author of Bitcoin.
-class Node {
-constructor(key, value) {
-this.key = key;
-this.value = value;
-this.next = null;
-}
-}
-class Table {
-constructor(size) {
-this.cells = new Array(size);
-}
-hash(key) {
-let total = 0;
-for (let i = 0; i < key.length; i++) total += key.charCodeAt(i);
-return total % this.cells.length;
-}
-insert(key, value) {
-const hash = this.hash(key);
-if (!this.cells[hash]) {
-this.cells[hash] = new Node(key, value);
-} else if (this.cells[hash].key === key) {
-this.cells[hash].value = value;
-} else {
-let node = this.cells[hash];
-while (node.next) {
-if (node.next.key === key) {
-node.next.value = value;
-return;
-}
-node = node.next;
-}
-node.next = new Node(key, value);
-}
-}
-get(key) {
-const hash = this.hash(key);
-if (!this.cells[hash]) return null;
-else {
-let node = this.cells[hash];
-while (node) {
-if (node.key === key) return node.value;
-node = node.next;
-}
-return null;
-}
-}
-getAll() {
-const table = [];
-for (let i = 0; i < this.cells.length; i++) {
-const cell = [];
-let node = this.cells[i];
-while (node) {
-cell.push(node.value);
-node = node.next;
-}
-table.push(cell);
-}
-return table;
-}
-}
-Conclusion:
+<br><br>
+<h4>Conclusion:</h4>
 Instances of these information structures can be found all over the internet. From the database to the server to the customer, and even the JavaScript motor itself, these information structures concretize what basically is simply on and off “switches” on silicon chips into exact ‘objects’. In spite of the fact that just advanced, the effect these items have on society is colossal. Your capacity to peruse this article openly and safely verifies the marvellous design of the web and the structure of its information. However, it is just the start. Man-made consciousness and decentralized blockchains in the coming decades will reclassify being human and the job of organizations that oversee our lives. Existential bits of knowledge and institutional disintermediation will be qualities of a web that has at long last developed.</p>
-
+<br>
         <hr>
 
       </div> <!-- /container -->
@@ -214,6 +99,6 @@ Instances of these information structures can be found all over the internet. Fr
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <script>$(document).ready(function() {<br> $('body').bootstrapMaterialDesign();<br> }<br>);<br></script>
   </body>
 </html>
